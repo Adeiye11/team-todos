@@ -1,8 +1,8 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import { Typography, Avatar, Stack, List, Divider, Paper } from "@mui/material";
+import { Typography, Avatar, Stack, List, Paper, Fab, Modal, TextField, Button, Container } from "@mui/material";
 import TodoItem from "./TodoItem";
-
+import AddIcon from '@mui/icons-material/Add';
 
 export async function loader({ params }) {
     const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${params.teamMemberId}`);
@@ -16,9 +16,44 @@ export async function loader({ params }) {
     return data;
 }
 
-
 function TeamMemberDetail() {
     const teamMember = useLoaderData();
+
+    const [open, setOpen] = React.useState(false);
+    const [newTodo, setNewTodo] = React.useState('');
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleNewTodoChange = (event) => {
+        setNewTodo(event.target.value);
+    };
+
+    async function handleAddTodo() {
+        await fetch(`https://team-todos-backend.onrender.com/todos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: teamMember.id,
+                title: newTodo,
+                completed: false
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                teamMember.todos.push(data);
+            });
+        setNewTodo('');
+        handleClose();
+    };
+
     return (
         <Stack sx={{ minWidth: 0, padding: 10, margin: "auto", alignItems: "center", justifyContent: "center", display: "flex" }}>
             <Avatar src={`https://picsum.photos/seed/${teamMember.id}/500/300`} sx={{ width: 150, height: 150 }} />
@@ -50,6 +85,44 @@ function TeamMemberDetail() {
                     ))}
                 </List>
             </Paper>
+
+            {/* Modal */}
+            <Modal
+                open={open}
+                onClose={handleClose}
+            >
+                <Paper sx={{
+                    position: 'absolute',
+                    width: 400,
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    padding: 2
+                }}>
+                    <Typography variant={"h6"} sx={{ padding: 2 }} textAlign={"center"}>
+                        Add New Todo Item for {teamMember.name}
+                    </Typography>
+                    <TextField
+                        fullWidth
+                        label="New Todo"
+                        variant="outlined"
+                        value={newTodo}
+                        onChange={handleNewTodoChange}
+                        sx={{ marginBottom: 2 }}
+                    />
+                    <Container sx={{ display: "flex", justifyContent: "center" }}>
+                        <Button variant="contained" color="primary" onClick={handleAddTodo}>
+                            Add
+                        </Button>
+                    </Container>
+                </Paper>
+            </Modal>
+
+            {/* Floating Action Button */}
+            <Fab color="primary" variant={"extended"} onClick={handleOpen} sx={{ position: "fixed", bottom: 15, right: 15 }}>
+                <AddIcon sx={{ mr: 1 }} />
+                New Todo
+            </Fab>
         </Stack>
     );
 }
