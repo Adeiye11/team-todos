@@ -1,11 +1,18 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import { Typography, Avatar, Stack, List } from "@mui/material";
+import TodoItem from "./TodoItem";
 
-import { Typography, Avatar, Stack } from "@mui/material";
 
 export async function loader({ params }) {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${params.teamMemberId}`);
-    const data = await response.json();
+    const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${params.teamMemberId}`);
+    const TodosResponse = await fetch(`https://team-todos-backend.onrender.com/todos`);
+    const userData = await userResponse.json();
+    const todosData = await TodosResponse.json();
+    const data = {
+        ...userData,
+        todos: todosData.filter((todo) => todo.userId === userData.id),
+    };
     return data;
 }
 
@@ -33,6 +40,11 @@ function TeamMemberDetail() {
             <Typography variant={"body1"} sx={{ padding: 2 }}>
                 {teamMember.company.catchPhrase}
             </Typography>
+            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+                {teamMember.todos.map((todo) => (
+                    <TodoItem key={todo.id} todo={todo} />
+                ))}
+            </List>
         </Stack>
     );
 }
