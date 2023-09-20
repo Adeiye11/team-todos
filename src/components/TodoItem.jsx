@@ -24,7 +24,7 @@ function TodoItem({ todo }) {
 
     return (
         <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={(event) => handleTodoUpdate(event.target.value, todo.id)}>
                 <Checkbox checked={Boolean(completed)} onChange={(event) => handleTodoUpdate(event.target.value, todo.id)} />
                 <ListItemText primary={todo.title} />
             </ListItemButton>
