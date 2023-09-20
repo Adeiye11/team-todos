@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Stack, Divider, TextField } from "@mui/material";
 import TeamItem from "./TeamItem";
 
 function TeamList({ team, onclick }) {
-    const [filteredTeam, setFilteredTeam] = useState(team);
+    const [filteredTeam, setFilteredTeam] = useState([]);
+
+    useEffect(() => {
+        setFilteredTeam(team);
+    }, [team]);
+
 
     const handleTextChange = (text) => {
         const newTeam = team.filter((teamMember) => teamMember.name.toLowerCase().includes(text.toLowerCase()));
