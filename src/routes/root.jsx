@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Card, Stack, Container } from "@mui/material";
+import { Typography, Paper, Stack, Container } from "@mui/material";
 import TeamMemberDetail from "../components/TeamMemberDetail";
 import TeamList from "../components/TeamList";
 
@@ -20,20 +20,20 @@ function Root() {
     };
 
     return (
-        <Card sx={{ minWidth: 0, margin: 15 }} variant={"elevation"}>
+        <Paper sx={{ minWidth: 0, margin: 15, overflow: "hidden" }} elevation={3}>
             <Stack direction={"row"}>
                 <TeamList team={teamMembers} onclick={handleTeamMemberClick} />
                 {selectedTeamMember ? (
                     <TeamMemberDetail teamMember={selectedTeamMember} />
                 ) : (
-                    <Container sx={{ padding: 10 }}>
+                    <Container sx={{ margin: "auto" }}>
                         <Typography variant="h4" component="h1" gutterBottom>
                             Select a team member
                         </Typography>
                     </Container>
                 )}
             </Stack>
-        </Card >
+        </Paper >
     );
 }
 
