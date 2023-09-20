@@ -1,6 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import { Typography, Avatar, Stack, List } from "@mui/material";
+import { Typography, Avatar, Stack, List, Divider, Paper } from "@mui/material";
 import TodoItem from "./TodoItem";
 
 
@@ -40,11 +40,16 @@ function TeamMemberDetail() {
             <Typography variant={"body1"} sx={{ padding: 2 }}>
                 {teamMember.company.catchPhrase}
             </Typography>
-            <List sx={{ width: "100%", bgcolor: "background.paper" }}>
-                {teamMember.todos.map((todo) => (
-                    <TodoItem key={todo.id} todo={todo} />
-                ))}
-            </List>
+            <Paper sx={{ backgroundColor: "#bfb192", margin: 3 }} elevation={10}>
+                <Typography variant={"h4"} sx={{ padding: 2 }} textAlign={"center"} color={"white"}>
+                    Todos
+                </Typography>
+                <List sx={{ width: "100%", backgroundColor: "#f7f7f7" }}>
+                    {teamMember.todos.map((todo) => (
+                        <TodoItem key={todo.id} todo={todo} />
+                    ))}
+                </List>
+            </Paper>
         </Stack>
     );
 }
