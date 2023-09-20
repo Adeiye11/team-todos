@@ -1,12 +1,12 @@
 import React from "react";
-import { Stack } from "@mui/material";
-import TeamItem from "./TeamMemberListItem";
+import { Stack, Divider } from "@mui/material";
+import TeamItem from "./TeamItem";
 
-function TeamList({ team }) {
+function TeamList({ team, onclick }) {
     return (
-        <Stack padding={100} >
+        <Stack divider={<Divider />} sx={{ minWidth: 0 }} p={3}>
             {team.map((teamMember) => (
-                <TeamItem key={teamMember.id} teamMember={teamMember} />
+                <TeamItem key={teamMember.id} teamMember={teamMember} onclick={onclick} />
             ))}
         </Stack>
     )
