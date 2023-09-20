@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AppBar, Toolbar, IconButton, Typography, Container, Stack } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { Typography, Card, Stack, Container } from "@mui/material";
 import TeamMemberDetail from "../components/TeamMemberDetail";
 import TeamList from "../components/TeamList";
 
@@ -21,30 +20,20 @@ function Root() {
     };
 
     return (
-        <>
-            <AppBar position="static">
-                <Toolbar variant="regular">
-                    <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" color="inherit" component="div">
-                        Team Todos
-                    </Typography>
-                </Toolbar>
-            </AppBar>
+        <Card sx={{ minWidth: 0, margin: 15 }} variant={"elevation"}>
             <Stack direction={"row"}>
                 <TeamList team={teamMembers} onclick={handleTeamMemberClick} />
-                <Container xs={6} md={9} maxWidth="sm">
-                    {selectedTeamMember ? (
-                        <TeamMemberDetail teamMember={selectedTeamMember} />
-                    ) : (
+                {selectedTeamMember ? (
+                    <TeamMemberDetail teamMember={selectedTeamMember} />
+                ) : (
+                    <Container sx={{ padding: 10 }}>
                         <Typography variant="h4" component="h1" gutterBottom>
                             Select a team member
                         </Typography>
-                    )}
-                </Container>
+                    </Container>
+                )}
             </Stack>
-        </>
+        </Card >
     );
 }
 
