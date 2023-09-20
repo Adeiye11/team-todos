@@ -1,5 +1,6 @@
 import React from "react";
-import { Paper, Stack } from "@mui/material";
+import { Paper, Stack, Typography } from "@mui/material";
+import CollectionsBookmarkTwoToneIcon from '@mui/icons-material/CollectionsBookmarkTwoTone';
 import TeamList from "../components/TeamList";
 import { Outlet, useLoaderData } from "react-router-dom";
 
@@ -13,12 +14,17 @@ function Root() {
     const teamMembers = useLoaderData();
 
     return (
-        <Paper sx={{ minWidth: 0, margin: 5, overflow: "hidden" }} elevation={3}>
-            <Stack direction={"row"}>
-                <TeamList team={teamMembers} />
-                <Outlet />
-            </Stack>
-        </Paper >
+        <>
+            <Typography variant={"h2"} sx={{ padding: 2 }} textAlign={"center"} marginTop={5}>
+                <CollectionsBookmarkTwoToneIcon fontSize={"large"} /> Team Todos <CollectionsBookmarkTwoToneIcon fontSize={"large"} />
+            </Typography>
+            <Paper sx={{ minWidth: 0, margin: 5, overflow: "hidden" }} elevation={3}>
+                <Stack direction={"row"}>
+                    <TeamList team={teamMembers} />
+                    <Outlet />
+                </Stack>
+            </Paper >
+        </>
     );
 }
 
