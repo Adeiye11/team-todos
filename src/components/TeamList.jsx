@@ -4,7 +4,7 @@ import TeamItem from "./TeamItem";
 
 function TeamList({ team, onclick }) {
     return (
-        <Stack divider={<Divider />} sx={{ minWidth: 0 }} p={3}>
+        <Stack divider={<Divider />} p={3} bgcolor={"#f7f7f7"} borderRight={"solid 1px #e3e3e3"}>
             {team.map((teamMember) => (
                 <TeamItem key={teamMember.id} teamMember={teamMember} onclick={onclick} />
             ))}
