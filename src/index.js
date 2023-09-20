@@ -7,24 +7,27 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Root from "./routes/root";
-import Team from "./routes/team";
-import Todos from "./routes/todos";
+import ErrorPage from "./error-page";
+import Root, { loader as rootLoader } from "./routes/root";
+import TeamMemberDetail, { loader as teamMemberLoader } from './components/TeamMemberDetail';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    // children: [
-    //   {
-    //     path: "team",
-    //     element: <Team />,
-    //   },
-    //   {
-    //     path: "todos",
-    //     element: <Todos />,
-    //   },
-    // ],
+    errorElement: <ErrorPage />,
+    loader: rootLoader,
+    children: [
+      {
+        path: "team/:teamMemberId",
+        element: <TeamMemberDetail />,
+        loader: teamMemberLoader,
+      },
+      //   {
+      //     path: "todos",
+      //     element: <Todos />,
+      //   },
+    ],
   },
 ]);
 

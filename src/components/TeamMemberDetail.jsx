@@ -1,9 +1,17 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
 import { Typography, Avatar, Stack } from "@mui/material";
 
+export async function loader({ params }) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users/${params.teamMemberId}`);
+    const data = await response.json();
+    return data;
+}
 
-function TeamMemberDetail({ teamMember }) {
+
+function TeamMemberDetail() {
+    const teamMember = useLoaderData();
     return (
         <Stack sx={{ minWidth: 0, padding: 10, margin: "auto", alignItems: "center", justifyContent: "center", display: "flex" }}>
             <Avatar src={`https://picsum.photos/seed/${teamMember.id}/500/300`} sx={{ width: 150, height: 150 }} />

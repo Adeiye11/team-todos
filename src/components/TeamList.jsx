@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Stack, Divider, TextField } from "@mui/material";
 import TeamItem from "./TeamItem";
 
-function TeamList({ team, onclick }) {
+function TeamList({ team }) {
     const [filteredTeam, setFilteredTeam] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function TeamList({ team, onclick }) {
             {/* search input */}
             <TextField id="outlined-basic" label="Search" variant="outlined" sx={{ background: "white" }} margin={"normal"} onChange={(event) => handleTextChange(event.target.value)} />
             {filteredTeam.map((teamMember) => (
-                <TeamItem key={teamMember.id} teamMember={teamMember} onclick={onclick} />
+                <TeamItem key={teamMember.id} teamMember={teamMember} />
             ))}
         </Stack>
     )
