@@ -1,35 +1,31 @@
 import React from "react";
 
-import { Typography, Button, Container, Card, CardMedia, CardContent } from "@mui/material";
+import { Typography, Avatar, Container, Stack } from "@mui/material";
 
 
 function TeamMemberDetail({ teamMember }) {
     return (
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-                component="img"
-                height="140"
-                image={`https://picsum.photos/seed/${teamMember.id}/500/300`}
-                alt="green iguana"
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {teamMember.name}
-                </Typography>
-                <Typography variant="body2" color="text.tertiary">
-                    @{teamMember.username}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {teamMember.email}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {teamMember.phone}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {teamMember.website}
-                </Typography>
-            </CardContent>
-        </Card>
+        <Stack sx={{ padding: 10, margin: "auto", alignItems: "center", justifyContent: "center", display: "flex" }}>
+            <Avatar src={`https://picsum.photos/seed/${teamMember.id}/500/300`} sx={{ width: 150, height: 150 }} />
+            <Typography variant={"h4"} sx={{ padding: 2 }}>
+                {teamMember.name}
+            </Typography>
+            <Typography variant={"body1"} sx={{ padding: 2 }}>
+                {teamMember.email}
+            </Typography>
+            <Typography variant={"body1"} sx={{ padding: 2 }}>
+                {teamMember.phone}
+            </Typography>
+            <Typography variant={"body1"} sx={{ padding: 2 }}>
+                {teamMember.website}
+            </Typography>
+            <Typography variant={"body1"} sx={{ padding: 2 }}>
+                {teamMember.company.name}
+            </Typography>
+            <Typography variant={"body1"} sx={{ padding: 2 }}>
+                {teamMember.company.catchPhrase}
+            </Typography>
+        </Stack>
     );
 }
 
