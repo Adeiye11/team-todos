@@ -20,7 +20,7 @@ function Root() {
     };
 
     return (
-        <Paper sx={{ minWidth: 0, margin: 15, overflow: "hidden" }} elevation={3}>
+        <Paper sx={{ margin: 15, overflow: "hidden" }} elevation={3}>
             <Stack direction={"row"}>
                 <TeamList team={teamMembers} onclick={handleTeamMemberClick} />
                 {selectedTeamMember ? (
