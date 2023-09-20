@@ -34,3 +34,5 @@ Team Todos is a task management application designed for a group of people to ke
 ## Deployment
 
 This is deployed on Render and can be found at https://team-todos.onrender.com/
+
+Backend api is live at https://team-todos-backend.onrender.com/todos
